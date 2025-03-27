@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { YoutubeIcon } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
 
 export default function Home() {
   const [url, setUrl] = useState('');
@@ -90,7 +91,9 @@ export default function Home() {
               {summary && (
                 <div className="mt-6 p-4 bg-muted rounded-lg">
                   <h2 className="text-xl font-semibold mb-2">Summary</h2>
-                  <p className="whitespace-pre-wrap">{summary}</p>
+                  <div className="prose">
+                    <ReactMarkdown>{summary}</ReactMarkdown>
+                  </div>
                 </div>
               )}
             </div>
