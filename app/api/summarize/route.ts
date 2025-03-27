@@ -5,13 +5,10 @@ import { google } from 'googleapis';
 import fs from 'fs/promises';
 import path from 'path';
 
-// Replace with your actual API key
-const API_KEY = 'AIzaSyCUtNBS-X03BHhVzkZZzb_cFDpuG8ClTz4';
-
 // Initialize the YouTube API client
 const youtube = google.youtube({
   version: 'v3',
-  auth: API_KEY
+  auth: process.env.GOOGLE_API_KEY
 });
 
 const openai = new OpenAI({
