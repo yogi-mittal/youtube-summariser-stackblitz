@@ -45,24 +45,23 @@ async function fetchDetailsOfYoutubeVideo(videoId: string) {
 
     // Fetch video details using YouTube API
     const response = await youtube.videos.list({
-      part: 'snippet',
-      id: videoId,
-      type: 'video',
+      part: ['snippet'],
+      id: [videoId],
     });
 
 
-    const videos = response.data.items;
-    if (videos.length === 0) {
+    const video = response.data.items?.[0];
+    if (!video) {
       console.log('No videos found.');
       return;
     }
 
     //retrun video details of first video
     return {
-      title: videos[0].snippet.title,
-      description: videos[0].snippet.description,
-      channel: videos[0].snippet.channelTitle,
-      videoId: videos[0].id.videoId,
+      title: video.snippet?.title || 'Unknown Title',
+      description: video.snippet?.description || 'No Description Available',
+      channel: video.snippet?.channelTitle || 'Unknown Channel',
+      videoId: videoId || 'Unknown Video ID',
     };
   } catch (error : any) {
     console.error('Error fetching videos:', error.message);
