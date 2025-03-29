@@ -2,9 +2,16 @@ import sys
 from youtube_transcript_api import YouTubeTranscriptApi
 from youtube_transcript_api._errors import TranscriptsDisabled, VideoUnavailable
 
+ytt_api = YouTubeTranscriptApi(
+    proxy_config=WebshareProxyConfig(
+        proxy_username="sbdyglot",
+        proxy_password="3j68ypptqdes",
+    )
+)
+
 def get_transcript(video_id):
     try:
-        transcript = YouTubeTranscriptApi.get_transcript(video_id)
+        transcript = ytt_api.get_transcript(video_id)
         return " ".join([entry['text'] for entry in transcript])
     except TranscriptsDisabled:
         return "Error: Transcripts are disabled for this video."
