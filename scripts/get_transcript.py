@@ -8,6 +8,11 @@ import os
 proxy_username = os.getenv("PROXY_UNAME", "")
 proxy_password = os.getenv("PROXY_PASS", "")
 
+# print the proxy credentials
+print(f"Proxy Username: {proxy_username}")
+print(f"Proxy Password: {proxy_password}")
+# Initialize the YouTubeTranscriptApi with proxy configuration
+
 ytt_api = YouTubeTranscriptApi(
     proxy_config=WebshareProxyConfig(
         proxy_username=proxy_username,
