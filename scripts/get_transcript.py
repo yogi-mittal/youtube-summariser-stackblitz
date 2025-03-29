@@ -15,8 +15,8 @@ print(f"Proxy Password: {proxy_password}")
 
 ytt_api = YouTubeTranscriptApi(
     proxy_config=WebshareProxyConfig(
-        proxy_username=proxy_username,
-        proxy_password=proxy_password,
+        proxy_username="sbdyglot",
+        proxy_password="3j68ypptqdes",
     )
 )
 
