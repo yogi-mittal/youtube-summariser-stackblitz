@@ -1,11 +1,17 @@
 import sys
 from youtube_transcript_api import YouTubeTranscriptApi
+from youtube_transcript_api.proxies import WebshareProxyConfig
 from youtube_transcript_api._errors import TranscriptsDisabled, VideoUnavailable
+import os
+
+
+proxy_username = os.getenv("PROXY_UNAME", "")
+proxy_password = os.getenv("PROXY_PASS", "")
 
 ytt_api = YouTubeTranscriptApi(
     proxy_config=WebshareProxyConfig(
-        proxy_username="sbdyglot",
-        proxy_password="3j68ypptqdes",
+        proxy_username=proxy_username,
+        proxy_password=proxy_password,
     )
 )
 
