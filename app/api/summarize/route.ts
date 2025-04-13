@@ -52,8 +52,7 @@ async function fetchDetailsOfYoutubeVideo(videoId: string) {
 
     const video = response.data.items?.[0];
     if (!video) {
-      console.log('No videos found.');
-      return;
+      throw new Error('No video found with the provided ID');
     }
 
     //retrun video details of first video
@@ -62,9 +61,11 @@ async function fetchDetailsOfYoutubeVideo(videoId: string) {
       description: video.snippet?.description || 'No Description Available',
       channel: video.snippet?.channelTitle || 'Unknown Channel',
       videoId: videoId || 'Unknown Video ID',
+      defaultLanguage: video.snippet?.defaultLanguage || 'Unknown Language',
+      defaultAudioLanguage: video.snippet?.defaultAudioLanguage || 'Unknown Audio Language',
     };
   } catch (error : any) {
-    console.error('Error fetching videos:', error.message);
+    throw new Error('Error fetching video details:', { cause: error });
   }
 }
 
@@ -77,8 +78,14 @@ async function saveVideoDetailsToFile(videoId: string, videoDetails: any, transc
     console.log('Saving video details to file:', videoDetails);
 
     // Create the content to save
-    const content = `
+    const content = `Video ID: ${videoDetails.videoId}
+
       Title: ${videoDetails.title}
+
+      Default Language: ${videoDetails.defaultLanguage}
+
+      Default Audio Language: ${videoDetails.defaultAudioLanguage}
+
       Channel: ${videoDetails.channel}
 
       Description: 
@@ -142,7 +149,7 @@ export async function POST(req: Request) {
       youTubeVideoInfo = content;
       console.log('Read video details from file:', content);
     } catch (error) {
-      console.error('Error reading video details from file:', error);
+      throw new Error('Error reading video details from file:', { cause: error });
     }
 
 
@@ -197,3 +204,5 @@ export async function POST(req: Request) {
     );
   }
 }
+
+//5. **Language**: For output language use the Default Language code mentioned in video information.

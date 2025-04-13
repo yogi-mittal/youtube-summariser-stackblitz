@@ -18,7 +18,12 @@ ytt_api = YouTubeTranscriptApi(
 
 def get_transcript(video_id):
     try:        
-        transcript = ytt_api.fetch(video_id, languages=['en', 'en-US', 'en-GB', 'en-IN']) 
+        transcript_list = ytt_api.list(video_id)
+        for ts in transcript_list:
+            default_language_code = ts.language_code
+            break
+
+        transcript = ytt_api.fetch(video_id, languages=[default_language_code, 'en', 'en-US', 'en-GB', 'en-IN']) 
         formatter = TextFormatter()
         text_formatted = formatter.format_transcript(transcript)
         return text_formatted
