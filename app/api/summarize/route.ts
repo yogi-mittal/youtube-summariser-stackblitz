@@ -118,11 +118,21 @@ async function fileExists(filePath: string): Promise<boolean> {
   }
 }
 
+function extractYouTubeVideoId(url: string): string | null {
+  // Handles URLs like:
+  // https://www.youtube.com/watch?v=VIDEO_ID
+  // https://youtu.be/VIDEO_ID
+  // https://www.youtube.com/embed/VIDEO_ID
+  const regex = /(?:youtube\.com\/(?:.*[?&]v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+  const match = url.match(regex);
+  return match ? match[1] : null;
+}
+
 export async function POST(req: Request) {
   try {
     const { url } = await req.json();
 
-    const videoId = url.split('v=')[1];
+    const videoId = extractYouTubeVideoId(url);;
 
     if (!videoId) {
       return NextResponse.json(
@@ -154,7 +164,7 @@ export async function POST(req: Request) {
 
 
     const stream = await openai.chat.completions.create({
-      model: "gpt-4o",
+      model: "gpt-4.1",
       messages: [
         {
           role: "system",
