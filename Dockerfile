@@ -5,7 +5,7 @@ FROM node:22
 RUN apt-get update && apt-get install -y python3 python3-pip && rm -rf /var/lib/apt/lists/*
 
 # Install youtube-transcript-api Python package
-RUN pip3 install youtube-transcript-api
+RUN pip install youtube-transcript-api
 
 # Set the working directory in the container
 WORKDIR /app
