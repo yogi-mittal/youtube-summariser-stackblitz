@@ -1,5 +1,5 @@
 # Use an official Node.js image as the base
-FROM bitnami/node:20
+FROM node:22
 
 # Install Python3 and pip
 RUN apt-get update && apt-get install -y python3 python3-pip && rm -rf /var/lib/apt/lists/*
