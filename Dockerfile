@@ -11,7 +11,7 @@ RUN pip3 install youtube-transcript-api
 WORKDIR /app
 
 # Copy the package.json and package-lock.json files
-COPY package.json package-lock.json ./
+COPY package.json ./
 
 ENV NODE_OPTIONS="--max-old-space-size=4096"
 
