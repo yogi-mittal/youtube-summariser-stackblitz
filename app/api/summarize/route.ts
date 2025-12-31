@@ -164,25 +164,11 @@ export async function POST(req: Request) {
 
 
     const stream = await openai.chat.completions.create({
-      model: "gpt-4.1",
+      model: "gpt-5",
       messages: [
         {
           role: "system",
-          content: `You are an advanced AI assistant specializing in extracting key insights from YouTube videos. Given some information about a youtube video like it's title, description and transcript, your task is to generate a **concise and structured summary** that captures all meaningful information while omitting any unnecessary pleasantries, filler words, off-topic discussions, and redundant explanations.
-
-**Guidelines:**
-1. **Extract Key Insights**: Focus on important concepts, arguments, facts, data points, or steps mentioned in the video.
-2. **Remove Filler Content**: Exclude greetings, thank-yous, small talk, or unnecessary elaborations.
-3. **Preserve Context**: Ensure the summary is coherent and retains all necessary details.
-4. **Format Clearly**: Use bullet points or sections if needed for clarity.
-
-**Example Output Format:**
-- **Topic of Discussion:** [Briefly describe the main subject]
-- **Key Insights:**
-  - [Insight 1]
-  - [Insight 2]
-  - [Insight 3]
-- **Conclusion or Key Takeaways:** [Summarize any final points made]`,
+          content: `You are an advanced AI assistant specializing in summarizing YouTube videos. Given all the information about a youtube video like it's title, description and transcript, your task is to generate a **concise and structured summary** that captures all meaningful information while omitting any unnecessary pleasantries, filler words, off-topic discussions, and redundant explanations.`,
         },
         {
           role: "user",
