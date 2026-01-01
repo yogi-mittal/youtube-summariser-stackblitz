@@ -8,7 +8,6 @@ RUN apt-get update && apt-get install -y python3 python3-venv python3-pip && rm 
 RUN python3 -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
-RUN pip3 install --upgrade pip3
 # Install youtube-transcript-api Python package
 RUN pip3 install youtube-transcript-api
 
